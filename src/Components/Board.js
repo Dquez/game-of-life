@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import Tile from './tile';
+import TileSizeContext from '../contexts/TileSizeContext';
 import './Board.css';
-// Most commonly used screen resolutions
-const WIDTH = 1024;
-const HEIGHT = 728;
-// any multiple of 8 will provide a perferct square
-const TILE_SIZE = 32;
 
 export default class Board extends Component {
     constructor(props) {
         super(props);
-        this.rows = Math.round(HEIGHT / TILE_SIZE);
-        this.columns = Math.round(WIDTH / TILE_SIZE);
+        // const {width, height, tileSize} = this.props; didn't use destructuring here to make the properties available on this object
+        this.width = this.props.width;
+        this.height = this.props.height;
+        this.tileSize = this.props.tileSize;
+        this.rows = (this.height / this.tileSize);
+        this.columns = (this.width / this.tileSize);
         this.board = this.makeEmptyBoard();
         this.state = {
             tiles: [],
@@ -20,6 +20,7 @@ export default class Board extends Component {
             isRunning: false
         }
     }
+    static contextType = TileSizeContext;
     // Create an empty board
     makeEmptyBoard() {
         let board = [];
@@ -123,8 +124,8 @@ export default class Board extends Component {
         const rect = this.boardRef.getBoundingClientRect();
         const offsetX = event.clientX - rect.left;
         const offsetY = event.clientY - rect.top;
-        const x = Math.floor(offsetX / TILE_SIZE);
-        const y = Math.floor(offsetY / TILE_SIZE);
+        const x = Math.floor(offsetX / this.tileSize);
+        const y = Math.floor(offsetY / this.tileSize);
         // check if x and y are both in the bounds of the grid
         if (x >= 0 && x <= this.columns && y >= 0 && y <= this.rows) {
             this.board[y][x] = !this.board[y][x];
@@ -146,13 +147,13 @@ export default class Board extends Component {
             </div>
             <div 
             className="Board"
-            style={{ width: WIDTH, height: HEIGHT, backgroundSize: `${TILE_SIZE}px ${TILE_SIZE}px`}}
+            style={{ width: this.width, height: this.height, backgroundSize: `${this.tileSize}px ${this.tileSize}px`}}
             onClick={this.handleClick}
             ref={(n) => { this.boardRef = n; }}
             >
             {tiles.map(tile => (
             <Tile 
-            tileSize={TILE_SIZE}
+            tileSize={this.tileSize}
             x={tile.x} 
             y={tile.y}
             key={`${tile.x},${tile.y}`}
