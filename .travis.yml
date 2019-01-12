@@ -9,3 +9,15 @@ before_install:
 # script:
 #   - docker run dquez/game-of-life npm run test -- --coverage
 
+deploy: 
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "game-of-life"
+  env: "GameOfLife-env"
+  bucket_name: "elasticbeanstalk-us-east-1-172287926365"
+  bucket_path: "game-of-life"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
