@@ -1,9 +1,9 @@
 sudo: required
+language: generic
 services: 
   - docker
 
 before_install:
-  - gem install bundler
   - docker build -t dquez/game-of-life -f Dockerfile.dev .
 script:
   - docker run dquez/game-of-life npm run test -- --coverage
