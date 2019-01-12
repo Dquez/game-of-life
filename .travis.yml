@@ -1,0 +1,9 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t dquez/docker-react-app -f Dockerfile.dev .
+script:
+  - docker run dquez/docker-react-app npm run test -- --coverage
+

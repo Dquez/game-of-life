@@ -16,7 +16,6 @@ export default class Board extends Component {
             intervalId: null,
             isRunning: false
         }
-        // const {width, height, tileSize} = this.props; didn't use destructuring here to make the properties available on this object
         this.board = this.createEmptyBoard();
     }
     // Create an empty board
