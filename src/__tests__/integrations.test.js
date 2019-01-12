@@ -1,8 +1,8 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
-import App from '../components/App';
-import Board from '../components/Board';
-import Tile from '../components/Tile';
+import App from '../components/App.js';
+import Board from '../components/Board.js';
+import Tile from '../components/Tile.js';
 
 
 let wrapper;

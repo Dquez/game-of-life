@@ -1,5 +1,6 @@
 import React from 'react';
-import Board from './Board';
+import Board from './Board.js';
+
 export default () =>{
         return(
             <div className='ui container'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Tile from '../tile';
+import Tile from '../Tile.js';
 
 let wrapped;
 beforeEach(()=> wrapped = shallow(<Tile tileSize={32} x={5} y={5} />));
