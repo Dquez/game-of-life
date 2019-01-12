@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
-import App from '../components/app';
+import App from '../components/App';
 import Board from '../components/Board';
 import Tile from '../components/Tile';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import App from '../app';
+import App from '../App';
 import Board from '../Board';
 
 let wrapped;
