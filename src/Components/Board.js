@@ -5,28 +5,29 @@ import './Board.css';
 export default class Board extends Component {
     constructor(props) {
         super(props);
-        // const {width, height, tileSize} = this.props; didn't use destructuring here to make the properties available on this object
         this.width = this.props.width;
         this.height = this.props.height;
         this.tileSize = this.props.tileSize;
-        this.rows = Math.round(this.height / this.tileSize);
-        this.columns = Math.round(this.width / this.tileSize);
-        this.board = this.makeEmptyBoard();
         this.state = {
             tiles: [],
+            rows: Math.round(this.height / this.tileSize),
+            columns: Math.round(this.width / this.tileSize),
             interval: 250,
             intervalId: null,
             isRunning: false
         }
+        // const {width, height, tileSize} = this.props; didn't use destructuring here to make the properties available on this object
+        this.board = this.createEmptyBoard();
     }
     // Create an empty board
-    makeEmptyBoard() {
-        let board = [];
+    createEmptyBoard() {
+        const board = [];
+        const {rows, columns} = this.state;
         // iterate over the each row
-        for (let y = 0; y < this.rows; y++) {
+        for (let y = 0; y < rows; y++) {
             board[y] = [];
             // iterate over each tile in given column
-            for (let x = 0; x < this.columns; x++) {
+            for (let x = 0; x < columns; x++) {
                 // set tile to false   
                 board[y][x] = false;
             }
@@ -34,12 +35,13 @@ export default class Board extends Component {
         return board;
     }
     makeRandomBoard = () => {
-        let board = [];
+        const board = [];
+        const {rows, columns} = this.state;
         // iterate over the each row
-        for (let y = 0; y < this.rows; y++) {
+        for (let y = 0; y < rows; y++) {
             board[y] = [];
             // iterate over each tile in given column
-            for (let x = 0; x < this.columns; x++) {
+            for (let x = 0; x < columns; x++) {
                 // set tile to true or false based on a ~50% chance
                   
                 board[y][x] = (Math.random() >= .5);
@@ -50,9 +52,10 @@ export default class Board extends Component {
     }
     // Create tiles from this.board
     createTiles() {
-        let tiles = [];
-        for (let y = 0; y < this.rows; y++) {
-            for (let x = 0; x < this.columns; x++) {
+        const tiles = [];
+        const {rows, columns} = this.state;
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < columns; x++) {
                 if (this.board[y][x]) {
                     tiles.push({ x, y });
                 }
@@ -72,9 +75,10 @@ export default class Board extends Component {
         this.setState({ isRunning: false, intervalId: null});
     }
     evolve = () => {
-        let newBoard = this.makeEmptyBoard();
-        for (let y = 0; y < this.rows; y++) {
-            for (let x = 0; x < this.columns; x++) {
+        const newBoard = this.createEmptyBoard();
+        const {rows, columns} = this.state;
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < columns; x++) {
                 // for each iteration, we need to find the total neighbors branching from all directions, including diagonal 
                 let neighbors = this.calculateNumNeighbors(x, y);
                 if (this.board[y][x]) {
@@ -101,6 +105,7 @@ export default class Board extends Component {
 
     calculateNumNeighbors(x, y) {
         let neighbors = 0;
+        const {rows, columns} = this.state;
         // [y, x] coordinates in relation to the current tile assuming we're at position [0, 0], this is clockwise starting from [-1,-1]
         // top-left top-mid top-right mid-right bottom-right  bottom-middle bottom-left middle left 
         const positions = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
@@ -110,7 +115,7 @@ export default class Board extends Component {
             y1 += y;
             x1 += x
             // need this error-boundary because without it, we could be checking a tile that doesn't exist for neighbors, which would throw and error
-            if (y1 >= 0 && y1 < this.rows && x1 >= 0 && x1 < this.columns  && this.board[y1][x1]) {
+            if (y1 >= 0 && y1 < rows && x1 >= 0 && x1 < columns  && this.board[y1][x1]) {
                 neighbors++;
             } 
         }) 
@@ -118,6 +123,7 @@ export default class Board extends Component {
     }
 
     handleClick = event => {
+        const {rows, columns} = this.state;
         // calculates the position of the board rectangle
         const rect = this.boardRef.getBoundingClientRect();
         const offsetX = event.clientX - rect.left;
@@ -125,7 +131,7 @@ export default class Board extends Component {
         const x = Math.floor(offsetX / this.tileSize);
         const y = Math.floor(offsetY / this.tileSize);
         // check if x and y are both in the bounds of the grid
-        if (x >= 0 && x <= this.columns && y >= 0 && y <= this.rows) {
+        if (x >= 0 && x <= columns && y >= 0 && y <= rows) {
             this.board[y][x] = !this.board[y][x];
         }
         this.setState({ tiles: this.createTiles() });
@@ -138,9 +144,9 @@ export default class Board extends Component {
         return (
         <>
             <div className="controls center aligned">
-                <button onClick={this.runGame} className='ui button primary'>Start</button>
-                <button onClick={this.stopGame} className='ui button red'>Stop</button>
-                <button onClick={this.makeRandomBoard} className='ui button green'>Random Board</button>
+                <button onClick={this.runGame} className='ui button primary start'>Start</button>
+                <button onClick={this.stopGame} className='ui button red stop'>Stop</button>
+                <button onClick={this.makeRandomBoard} className='ui button green random'>Random Board</button>
                 
             </div>
             <div 
