@@ -136,7 +136,7 @@ export default class Board extends Component {
     render() {
         const { tiles } = this.state;
         return (
-        <div>
+        <>
             <div className="controls center aligned">
                 <button onClick={this.runGame} className='ui button primary'>Start</button>
                 <button onClick={this.stopGame} className='ui button red'>Stop</button>
@@ -159,7 +159,7 @@ export default class Board extends Component {
             ))}
 
             </div>
-        </div>
+        </>
         );
     }
 }
