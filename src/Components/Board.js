@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Tile from './tile';
-import TileSizeContext from '../contexts/TileSizeContext';
 import './Board.css';
 
 export default class Board extends Component {
@@ -10,17 +9,16 @@ export default class Board extends Component {
         this.width = this.props.width;
         this.height = this.props.height;
         this.tileSize = this.props.tileSize;
-        this.rows = (this.height / this.tileSize);
-        this.columns = (this.width / this.tileSize);
+        this.rows = Math.round(this.height / this.tileSize);
+        this.columns = Math.round(this.width / this.tileSize);
         this.board = this.makeEmptyBoard();
         this.state = {
             tiles: [],
-            interval: 500,
+            interval: 250,
             intervalId: null,
             isRunning: false
         }
     }
-    static contextType = TileSizeContext;
     // Create an empty board
     makeEmptyBoard() {
         let board = [];
