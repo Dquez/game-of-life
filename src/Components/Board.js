@@ -74,6 +74,11 @@ export default class Board extends Component {
         clearInterval(this.state.intervalId);
         this.setState({ isRunning: false, intervalId: null});
     }
+    clearBoard = () => {
+        clearInterval(this.state.intervalId);
+        this.setState({ isRunning: false, intervalId: null});
+        this.setState({tiles: [], board : this.createEmptyBoard()})
+    }
     evolve = () => {
         const newBoard = this.createEmptyBoard();
         const {rows, columns} = this.state;
@@ -143,14 +148,15 @@ export default class Board extends Component {
         const { tiles } = this.state;
         return (
         <>
-            <div className="controls center aligned">
+            <div className='controls center aligned'>
                 <button onClick={this.runGame} className='ui button primary start'>Start</button>
                 <button onClick={this.stopGame} className='ui button red stop'>Stop</button>
                 <button onClick={this.makeRandomBoard} className='ui button green random'>Random Board</button>
+                <button onClick={this.clearBoard} className='ui button yellow clear'>Clear Board</button>
                 
             </div>
             <div 
-            className="Board"
+            className='Board'
             style={{ width: this.width, height: this.height, backgroundSize: `${this.tileSize}px ${this.tileSize}px`}}
             onClick={this.handleClick}
             ref={(n) => { this.boardRef = n; }}

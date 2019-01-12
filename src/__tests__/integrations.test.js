@@ -51,4 +51,12 @@ describe('Full game', ()=>{
         boardWrapped.find('.stop').at(0).simulate('click');
         expect(boardWrapped.state().isRunning).toEqual(false);
     })
+    it('can clear the board and restart the game by clicking on clear board', ()=>{
+        boardWrapped.find('.random').at(0).simulate('click');
+        boardWrapped.find('.start').at(0).simulate('click');
+        boardWrapped.find('.clear').at(0).simulate('click');
+        expect(boardWrapped.state().isRunning).toEqual(false);
+        expect(boardWrapped.state().intervalId).toEqual(null);
+        expect(boardWrapped.state().tiles.length).toEqual(0);
+    })
 })
