@@ -1,6 +1,9 @@
 # Game of Life
 [The Game of Life Wiki](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
+## Live application deployed to AWS using docker and Travis for CI/CD
+[Game of Life](http://gameoflife-env.txiujkakdk.us-east-1.elasticbeanstalk.com/)
+
 ## Rules
 
 The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontal, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
@@ -13,17 +16,22 @@ The universe of the Game of Life is an infinite, two-dimensional orthogonal grid
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed; births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a tick. Each generation is a pure function of the preceding one. The rules continue to be applied repeatedly to create further generations.
 
 ## Getting Started
+*Without Docker*
 `git clone`
 `npm install`
 `npm run start` to start the react app
 `npm run test` to run the test suite
+*With Docker*
+`docker-compose up --build`
 
 ## Built With
+* [aws elastic beanstalk](https://aws.amazon.com/) - With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications.
 * [docker](https://www.docker.com) - Packaged Software into Standardized Units for Development, Shipment and Deployment
 * [enzyme](https://airbnb.io/enzyme/) - Enzyme is a JavaScript Testing utility for React
 * [jest](https://jestjs.io/) - Front-end JavaScript testing library with little configuration required. 
 * [react](https://reactjs.org/) - A JavaScript library for building component-based user interfaces
 * [semantic ui](https://semantic-ui.com/) - Front-end framework for styling
+* [travis-ci](https://semantic-ui.com/https://travis-ci.org) - Travis CI is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub.
 
 ## How I built it
 Before I began coding out the app, I researched how the game is actually played. After sifting through Wikipedia and other articles, I had to think about what type of grid system I wanted to use to build the application. I initially started with a plain HTML grid but wasn't sure how I would add and remove blocks dynamically. That's when I turned to the array of arrays, to hold my tile pieces while the game was going on. When the component is being initialized, an empty grid is created with the help of some CSS. I chose to add in a random grid button because during testing, "flipping" the tiles myself was tedious. Once I got the basic grid layout and click handler in place, it was time for the 4 rule logic. Before you can determine if a tile should be turned on or off/ or dead or alive, you need to count how many potential neighbors it has. After cross-referencing the spaces around a given tile using a normalized x and y coordinate, neighbors are determined and the game logic determines if the tile should be alive or not. This process continues at an interval of 250 milliseconds, or until the user clicks the stop button or the clear board button.
