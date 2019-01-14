@@ -1,10 +1,4 @@
 sudo: required
-language: node_js
-node_js:
-  - 10
-cache:
-  directories:
-    - node_modules
 services: 
   - docker
 
@@ -14,24 +8,4 @@ before_install:
 script:
   - docker run dquez/game-of-life npm run test -- --coverage
 
-# script:
-#   - npm run build
-#   - npm run test -- --coverage
 
-
-# deploy: 
-#   provider: elasticbeanstalk
-#   region: "us-east-1"
-#   app: "game-of-life"
-#   env: "GameOfLife-env"
-#   bucket_name: "elasticbeanstalk-us-east-1-172287926365"
-#   bucket_path: "game-of-life"
-#   on:
-#     branch: master
-#   access_key_id: "$AWS_ACCESS_KEY"
-#   secret_access_key:
-#     secure: "$AWS_SECRET_KEY"
-
-#   language: node_js
-# node_js:
-#   - "stable"
