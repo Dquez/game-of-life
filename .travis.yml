@@ -1,5 +1,10 @@
 sudo: required
-language: generic
+language: node_js
+node_js:
+  - 8
+cache:
+  directories:
+    - node_modules
 services: 
   - docker
 
@@ -10,7 +15,8 @@ before_install:
 #   - docker run dquez/game-of-life npm run test -- --coverage
 
 script:
-  - npm run test:coverage
+  - npm run build
+  - npm run test -- --coverage
 
 
 # deploy: 
