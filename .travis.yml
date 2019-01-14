@@ -1,7 +1,7 @@
 sudo: required
 language: node_js
 node_js:
-  - 8
+  - 10
 cache:
   directories:
     - node_modules
@@ -9,10 +9,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t dquez/game-of-life -f Dockerfile.dev .
+  - docker build -t dquez/game-of-life-ci -f Dockerfile.dev .
 # getting multiple "Cannot find module './Board.js' from 'App.js'"", but tests work locally
 script:
-  - docker run dquez/game-of-life npm run test -- --coverage
+  - docker run dquez/game-of-life-ci npm run test
 
 # script:
 #   - npm run build
