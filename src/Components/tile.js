@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tile.css'
+import './tile.css'
 
 export default ({x, y, tileSize}) => {
       return (

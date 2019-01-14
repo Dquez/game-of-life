@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Tile from './Tile';
-import './Board.css';
+import Tile from './tile';
+import './board.css';
 
 export default class Board extends Component {
     constructor(props) {
@@ -155,7 +155,7 @@ export default class Board extends Component {
                 
             </div>
             <div 
-            className='Board'
+            className='board'
             style={{ width: this.width, height: this.height, backgroundSize: `${this.tileSize}px ${this.tileSize}px`}}
             onClick={this.handleClick}
             ref={(n) => { this.boardRef = n; }}

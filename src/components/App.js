@@ -1,5 +1,5 @@
 import React from 'react';
-import Board from './Board.js';
+import Board from './board.js';
 
 export default () =>{
         return(

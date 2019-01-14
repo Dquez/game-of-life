@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Board from '../Board.js';
+import Board from '../board.js';
 
 
 let wrapped;
@@ -13,6 +13,6 @@ describe('Board component', () => {
         expect(wrapped.childAt(0).hasClass('controls')).toEqual(true);        
     })
     it('renders the Board div', () =>{
-        expect(wrapped.childAt(1).hasClass('Board')).toEqual(true);  
+        expect(wrapped.childAt(1).hasClass('board')).toEqual(true);  
     })
 })
