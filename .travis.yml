@@ -6,18 +6,28 @@ services:
 before_install:
   - docker build -t dquez/game-of-life -f Dockerfile.dev .
 # getting multiple "Cannot find module './Board.js' from 'App.js'"", but tests work locally
-# script:
-#   - docker run dquez/game-of-life npm run test -- --coverage
+script:
+  - docker run dquez/game-of-life npm run test -- --coverage
 
-deploy: 
-  provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "game-of-life"
-  env: "GameOfLife-env"
-  bucket_name: "elasticbeanstalk-us-east-1-172287926365"
-  bucket_path: "game-of-life"
-  on:
-    branch: master
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+# script:
+#   - npm test
+#   - npm run test:coverage
+#   - npm run build
+
+
+# deploy: 
+#   provider: elasticbeanstalk
+#   region: "us-east-1"
+#   app: "game-of-life"
+#   env: "GameOfLife-env"
+#   bucket_name: "elasticbeanstalk-us-east-1-172287926365"
+#   bucket_path: "game-of-life"
+#   on:
+#     branch: master
+#   access_key_id: "$AWS_ACCESS_KEY"
+#   secret_access_key:
+#     secure: "$AWS_SECRET_KEY"
+
+#   language: node_js
+# node_js:
+#   - "stable"
