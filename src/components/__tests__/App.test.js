@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import App from '../app.js';
-import Board from '../board.js';
+import App from '../app';
+import Board from '../board';
 
 let wrapped;
 beforeEach(() => {
