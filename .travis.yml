@@ -11,12 +11,12 @@ services:
 before_install:
   - docker build -t dquez/game-of-life -f Dockerfile.dev .
 # getting multiple "Cannot find module './Board.js' from 'App.js'"", but tests work locally
-# script:
-#   - docker run dquez/game-of-life npm run test -- --coverage
-
 script:
-  - npm run build
-  - npm run test -- --coverage
+  - docker run dquez/game-of-life npm run test -- --coverage
+
+# script:
+#   - npm run build
+#   - npm run test -- --coverage
 
 
 # deploy: 
