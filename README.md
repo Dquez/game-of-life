@@ -1,9 +1,6 @@
 # Game of Life
 [The Game of Life Wiki](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
-## Live application deployed to AWS using docker and Travis for CI/CD
-[Game of Life](http://gameoflife-env.txiujkakdk.us-east-1.elasticbeanstalk.com/)
-
 ## Rules
 
 The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontal, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
@@ -26,8 +23,8 @@ The initial pattern constitutes the seed of the system. The first generation is 
 
 ## Built With
 * [aws elastic beanstalk](https://aws.amazon.com/) - With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications.
-* [docker](https://www.docker.com) - Packaged Software into Standardized Units for Development, Shipment and Deployment
-* [enzyme](https://airbnb.io/enzyme/) - Enzyme is a JavaScript Testing utility for React
+* [docker](https://www.docker.com) - Packaged software into standardized units for development, shipment and deployment
+* [enzyme](https://airbnb.io/enzyme/) - Enzyme is a JavaScript testing utility for React
 * [jest](https://jestjs.io/) - Front-end JavaScript testing library with little configuration required. 
 * [react](https://reactjs.org/) - A JavaScript library for building component-based user interfaces
 * [semantic ui](https://semantic-ui.com/) - Front-end framework for styling
